@@ -115,7 +115,7 @@ function showEditForm(element, id) {
     let o_form = $('#editTaskList');
     let input_id = $(o_form).find('input[name="taskList_id"]');
     let input_name = $(o_form).find('input[name="name"]');
-    let name = $(element).siblings('#tastList_name').text();
+    let name = $(element).siblings('#taskList_name').text();
 
     $(input_id).val(id);
     $(input_name).val(name);
