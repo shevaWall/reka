@@ -1,0 +1,57 @@
+.left-sidebar{
+    max-height: 90vh;
+}
+
+.left-sidebar .sidebar-head{
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    overflow: hidden;
+    padding: 6px 8px 6px 0;
+    text-decoration: none;
+}
+
+.sidebarTitle{
+    flex: 1 1 auto;
+    width: min-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.list-of-taskList{
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-of-taskList a .btn-close{
+    float:right;
+}
+
+#addNewTaskList .modal-footer.row.justify-content-around{
+    border-top:0;
+}
+
+.btn-pencil{
+    float: right;
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: #000;
+    background: transparent url('/images/pencil.svg') center/1em auto no-repeat;
+    border: 0;
+    border-radius: 0.25rem;
+    opacity: 0.5;
+}
+.btn-pencil:hover{
+    color: #000;
+    text-decoration: none;
+    opacity: 0.75;
+}
