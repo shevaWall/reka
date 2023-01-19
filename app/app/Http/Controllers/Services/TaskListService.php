@@ -44,7 +44,7 @@ class TaskListService extends Controller
 
     public function patch(PatchRequest $request)
     {
-        $taskList = TaskList::where('id', $request->taskList_id)
+        TaskList::where('id', $request->taskList_id)
             ->update([
                 'name' => $request->name,
             ]);

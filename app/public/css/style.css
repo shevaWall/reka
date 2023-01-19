@@ -34,7 +34,8 @@
     float:right;
 }
 
-#addNewTaskList .modal-footer.row.justify-content-around{
+#addNewTaskList .modal-footer.row.justify-content-around,
+#editTaskList .modal-footer.row.justify-content-around{
     border-top:0;
 }
 
