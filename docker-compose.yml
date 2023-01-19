@@ -5,21 +5,21 @@ services:
     build:
       context: ./app
       dockerfile: ../nginx/Dockerfile
-    container_name: sprinthost_nginx
+    container_name: reka_nginx
     restart: unless-stopped
     ports:
       - 80:80
       - 443:443
     volumes:
       - ./app:/var/www/html/app
-      - ./sprinthost_vue:/var/www/html/vue
+      - ./.env:/var/www/html/app/.env
     depends_on:
       - app
 
   app:
     build:
       context: ./app
-    container_name: sprinthost_app
+    container_name: reka_app
     restart: unless-stopped
     volumes:
       - ./app:/var/www/html/app
@@ -29,7 +29,7 @@ services:
 
   db:
     image: library/mariadb:latest
-    container_name: sprinthost_db
+    container_name: reka_db
     restart: unless-stopped
     environment:
       - MARIADB_USER=${DB_USERNAME}
@@ -40,32 +40,6 @@ services:
       - 3306:3306
     volumes:
       - dbdata:/var/lib/mysql
-
-  vue:
-    build:
-      context: ./sprinthost_vue
-    container_name: sprinthost_vue
-    restart: unless-stopped
-    volumes:
-      - ./sprinthost_vue/public:/var/www/html/vue/public
-      - ./sprinthost_vue/src:/var/www/html/vue/src
-      - ./sprinthost_vue/index.html:/var/www/html/vue/index.html
-      - ./sprinthost_vue/vite.config.js:/var/www/html/vue/vite.config.js
-    ports:
-      - 5173:5173
-    depends_on:
-      - app
-
-  supervisord:
-    build:
-      context: ./supervisor
-    container_name: sprinthost_sup
-    volumes:
-      - ./app:/var/www/html/app
-      - .env:/var/www/html/app/.env
-    depends_on:
-      - app
-
 
 volumes:
   dbdata:
