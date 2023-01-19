@@ -41,10 +41,7 @@
                     </form>
                 </div>
                 <div class="modal-footer spinners row justify-content-around d-none">
-                    <x-spinner.warning/>
-                    <x-spinner.primary/>
-                    <x-spinner.success/>
-                    <x-spinner.danger/>
+                    <x-spinner.four-spinner/>
                 </div>
 
                 <div class="modal-footer success d-none">
@@ -76,20 +73,20 @@
                         </div>
 
                         <x-secondary-button data-bs-dismiss="modal">Cancel</x-secondary-button>
-                        <x-forms.button-success>Create</x-forms.button-success>
+                        <x-forms.button-success>Save</x-forms.button-success>
                     </form>
                 </div>
                 <div class="modal-footer spinners row justify-content-around d-none">
-                    <x-spinner.warning/>
-                    <x-spinner.primary/>
-                    <x-spinner.success/>
-                    <x-spinner.danger/>
+                    <x-spinner.four-spinner/>
                 </div>
 
-                <div class="modal-footer success d-none">
+                <div class="modal-footer alerts">
                     {{-- todo: закинуть в компонент--}}
-                    <div class="alert alert-success col-12" role="alert">
+                    <div class="alert alert-success col-12 d-none" role="alert">
                         Changes saved
+                    </div>
+                    <div class="alert alert-danger col-12 d-none" role="alert">
+                        Your request can't be executed
                     </div>
                 </div>
 
