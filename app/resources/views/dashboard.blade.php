@@ -14,83 +14,39 @@
             @include('components.task-list.wrapper-list-of-taskList', $task_lists)
         </div>
         <div class="col-12 col-md-9">
+            <div class="row shadow pt-2">
+                <div class="col-12 text-center h5">Task items</div>
+                <div class="col-12 listItems-wrapper">
 
-        </div>
-    </div>
-
-{{--    add taskList--}}
-    <div class="modal fade" id="addNewTaskList" tabindex="-1" aria-labelledby="addNewTaskListLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new task list</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" id="formAddNewTaskList" action="#">
-                        @csrf
-                        <p>Please enter name of task list.</p>
-
-                        <div class="input-group mb-3">
-                            <x-forms.input-label-custom>List name</x-forms.input-label-custom>
-                            <x-forms.text-input type="text" name="name" placeholder="List name" required="required"/>
+                    <div class="row">
+                        <div class="col-12 text-center spinners d-none">
+                            <x-spinner.four-spinner />
+                        </div>
+                        <div class="col-12 listItems-content">
+                            <div class="col-12 text-center h3">
+                                @if($task_lists->count())
+                                    <-Choose task list
+                                @else
+                                    <-First create new task list
+                                @endif
+                            </div>
                         </div>
 
-                        <x-secondary-button data-bs-dismiss="modal">Cancel</x-secondary-button>
-                        <x-forms.button-success>Create</x-forms.button-success>
-                    </form>
-                </div>
-                <div class="modal-footer spinners row justify-content-around d-none">
-                    <x-spinner.four-spinner/>
-                </div>
-
-                <div class="modal-footer success d-none">
-                    {{-- todo: закинуть в компонент--}}
-                    <div class="alert alert-success col-12" role="alert">
-                        Successes created
                     </div>
                 </div>
-
+                <div class="col-10 mx-auto text-center bg-light py-3 btn d-none"
+                     id="addNewTaskItemBtn"
+                     data-bs-toggle="modal"
+                     data-bs-target="#addNewListItem">
+                    <div class="">Add task item</div>
+                </div>
             </div>
         </div>
     </div>
 
-{{--    edit taskList--}}
-    <div class="modal fade" id="editTaskList" tabindex="-1" aria-labelledby="editTaskListLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit task list</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" id="formEditTaskList" action="#">
-                        @csrf
-                        <input type="hidden" name="taskList_id" value="">
-                        <div class="input-group mb-3">
-                            <x-forms.input-label-custom>List name</x-forms.input-label-custom>
-                            <x-forms.text-input type="text" name="name" placeholder="List name" required="required"/>
-                        </div>
 
-                        <x-secondary-button data-bs-dismiss="modal">Cancel</x-secondary-button>
-                        <x-forms.button-success>Save</x-forms.button-success>
-                    </form>
-                </div>
-                <div class="modal-footer spinners row justify-content-around d-none">
-                    <x-spinner.four-spinner/>
-                </div>
-
-                <div class="modal-footer alerts">
-                    {{-- todo: закинуть в компонент--}}
-                    <div class="alert alert-success col-12 d-none" role="alert">
-                        Changes saved
-                    </div>
-                    <div class="alert alert-danger col-12 d-none" role="alert">
-                        Your request can't be executed
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    <x-forms.modal.add-task-list/>
+    <x-forms.modal.edit-task-list/>
+    <x-forms.modal.add-list-item />
+    <x-forms.modal.edit-list-item/>
 </x-app-layout>
