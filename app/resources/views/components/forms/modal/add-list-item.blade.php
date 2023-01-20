@@ -23,6 +23,11 @@
                         <x-forms.input-label-custom>Desciption</x-forms.input-label-custom>
                         <x-forms.textarea-input name="description" />
                     </div>
+                    <div class="input-group mb-3">
+                        <x-forms.input-label-custom>Tags</x-forms.input-label-custom>
+                        <x-forms.text-input type="text" name="tags" placeholder="Tags" />
+                        <div class="text-secondary col-12">use comma to separate tags</div>
+                    </div>
 
                     <x-secondary-button data-bs-dismiss="modal">Cancel</x-secondary-button>
                     <x-forms.button-success>Create</x-forms.button-success>
