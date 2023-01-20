@@ -31,10 +31,10 @@ class TaskListService extends Controller
         ]);
     }
 
-    public function destroy(DestroyRequest $request)
+    public function destroy(TaskList $taskList)
     {
-        TaskList::destroy($request->id);
-        Pivot_TasklistAndUser::where('task_lists_id', $request->id)->delete();
+        Pivot_TasklistAndUser::where('task_lists_id', $taskList->id)->delete();
+        $taskList->delete();
 
         return response()->json([
             'status' => '200',
