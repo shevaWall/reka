@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+        'list_items_id',
+    ];
 }
