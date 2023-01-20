@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('file')->nullable();
-            $table->integer('task_lists_id');
+            $table->integer('task_list_id');
             $table->timestamps();
         });
     }
