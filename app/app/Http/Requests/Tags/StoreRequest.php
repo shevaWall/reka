@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\TaskList;
+namespace App\Http\Requests\Tags;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -21,13 +21,11 @@ class StoreRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            [
-                'name' => 'string|required|max:254',
-                'user_id' => 'integer|required',
-            ]
+            'name' => 'string|required|max:254',
+            'list_items_id' => 'integer|required',
         ];
     }
 }
