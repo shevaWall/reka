@@ -30,12 +30,18 @@
     padding: 0;
 }
 
+.listItems-wrapper{
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
 .list-of-taskList a .btn-close{
     float:right;
 }
 
 #addNewTaskList .modal-footer.row.justify-content-around,
-#editTaskList .modal-footer.row.justify-content-around{
+#editTaskList .modal-footer.row.justify-content-around,
+#addNewListItem .modal-footer.row.justify-content-around{
     border-top:0;
 }
 
@@ -55,4 +61,11 @@
     color: #000;
     text-decoration: none;
     opacity: 0.75;
+}
+
+#addNewTaskItem{
+    text-decoration: none;
+}
+#addNewTaskItem:hover{
+    font-weight: bold;
 }
