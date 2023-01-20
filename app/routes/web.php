@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ListItemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Services\ImageStorageService;
+use App\Http\Controllers\Services\ListItemService;
 use App\Http\Controllers\Services\TaskListService;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\TaskListController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,18 +54,47 @@ Route::group([
         'prefix'    =>  'ajax',
         'as'        =>  'ajax.',
     ], function(){
+
+        //task Lists
         Route::group([
             'prefix'    =>  'taskList',
             'as'        =>  'taskList.',
         ], function(){
             Route::post('store', [TaskListService::class, "store"]);
-            Route::delete('/', [TaskListService::class, 'destroy']);
+            Route::delete('/{taskList}', [TaskListService::class, 'destroy']);
             Route::get('/', [TaskListController::class, "index"]);
             Route::patch("/", [TaskListService::class, "patch"]);
             Route::get("{taskList_id}", [TaskListController::class, "show"])
                 ->middleware('ch_own');
         });
+
+        // list items
+        Route::group([
+            'prefix'    =>  'listItems',
+            'as'        =>  'listItems.',
+        ], function(){
+            Route::post('/', [ListItemService::class, "store"]);
+            Route::delete('/{listItem}', [ListItemController::class, 'destroy']);
+            Route::get("/listItem_{listItem}", [ListItemController::class, "showById"]);
+            Route::get("/{taskList}", [ListItemController::class, "show"]);
+            Route::patch('/', [ListItemService::class, 'changeCompleted']);
+        });
+
+        Route::group([
+            'prefix'    =>  'listItemImage',
+            'as'        =>  'listItemImage.',
+        ], function(){
+            Route::delete('/{listItem}', [ImageStorageService::class, 'delete']);
+        });
+
+        Route::group([
+            'prefix'    =>  'tags',
+            'as'        =>  'tags.',
+        ], function(){
+            Route::delete('/{tag}', [TagController::class, 'deleteTag']);
+        });
     });
+
 });
 
 require __DIR__ . '/auth.php';
