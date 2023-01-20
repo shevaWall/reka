@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ListItem extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'description',
+        'file',
+        'completed',
+        'task_list_id',
+    ];
 }
