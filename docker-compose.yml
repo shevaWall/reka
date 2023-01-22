@@ -24,6 +24,7 @@ services:
     volumes:
       - ./app:/var/www/html/app
       - ./.env:/var/www/html/app/.env
+      - ./run.sh:/tmp/run.sh
     depends_on:
       - db
 
