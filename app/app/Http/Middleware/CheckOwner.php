@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Requests\TaskList\CheckOwnerRequest;
 use Closure;
 use Illuminate\Http\Request;
 

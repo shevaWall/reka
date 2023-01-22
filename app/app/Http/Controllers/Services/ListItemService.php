@@ -7,6 +7,8 @@ use App\Http\Controllers\TagController;
 use App\Http\Requests\ListItem\CheckboxRequest;
 use App\Http\Requests\ListItem\StoreRequest;
 use App\Models\ListItem;
+use App\Models\TaskList;
+use Illuminate\Http\JsonResponse;
 
 class ListItemService extends Controller
 {
@@ -47,27 +49,44 @@ class ListItemService extends Controller
             ]);
         }
 
-        if($request->tags)
-           TagController::storeTags($listItem, $request->tags);
+        if ($request->tags)
+            TagController::storeTags($listItem, $request->tags);
+
     }
 
-    public static function delete(ListItem $listItem)
+    /**
+     * Delete list item
+     * @param ListItem $listItem
+     * @return void
+     */
+    public static function delete(ListItem $listItem): void
     {
         ImageStorageService::delete($listItem);
         TagController::deleteTags($listItem->id);
         $listItem->delete();
     }
 
-    public function changeCompleted(CheckboxRequest $request)
+    /**
+     * Change list item status
+     * @param CheckboxRequest $request
+     * @return void
+     */
+    public function changeCompleted(CheckboxRequest $request): void
     {
         $listItem = ListItem::find($request->list_item_id);
         $listItem->completed = !$listItem->completed;
         $listItem->save();
+    }
 
-        return response()->json([
-            'status' => 'ok',
-            'data' => $listItem,
-        ]);
+    /**
+     * Delete all list items by task list id
+     * @param TaskList $taskList
+     * @return void
+     */
+    public static function deleteAllByTaskListId(TaskList $taskList): void
+    {
+        ListItem::where('task_list_id', $taskList->id)
+            ->delete();
     }
 
 }

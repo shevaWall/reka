@@ -1,15 +1,18 @@
 <div class="card mb-3 shadow" id="listItem_{{$listItem->id}}">
     <div class="row g-0">
-        <div class="col-md-1 my-auto text-center">
+        <div class="col-1 my-auto text-center">
             <input class="form-check-input"
                    type="checkbox"
                    value="{{$listItem->completed}}" name="completed" onchange="listItemChangeState(this)"
                    @if($listItem->completed) checked="checked" @endif
             />
+            <div class="spinner-border d-none" role="status">
+                <span class="visually-hidden">Загрузка...</span>
+            </div>
         </div>
         @if($listItem->file_preview)
             <div @class([
-                        'col-md-2' => $listItem->file_preview != '',
+                        'col-2' => $listItem->file_preview != '',
                         ])>
                 <a href="{{asset('/storage/'.$listItem->file)}}" target="_blank" class="listItem_a">
                     <img src="{{asset('/storage/'.$listItem->file_preview)}}" class="img-fluid rounded-start"
@@ -18,8 +21,8 @@
             </div>
         @endif
         <div @class([
-                    'col-md-8' => $listItem->file_preview != '',
-                    'col-md-10' => $listItem->file_preview == '',
+                    'col-8' => $listItem->file_preview != '',
+                    'col-10' => $listItem->file_preview == '',
                     ])>
             <div class="card-body">
                 <div class="row">
@@ -41,7 +44,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-1 actions my-auto">
+        <div class="col-1 actions my-auto">
             <div class="row g-0">
                 <div class="spinner d-none text-center">
                     <x-spinner.danger/>

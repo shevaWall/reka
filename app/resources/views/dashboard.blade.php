@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="row py-5">
-        <div class="col-12 col-md-3 left-sidebar shadow">
+        <div class="col-12 col-md-3 left-sidebar shadow mb-3 mb-md-0">
             <div class="sidebar-head">
                 <span class="h5 sidebarTitle">Your lists</span>
                 <div class="d-flex justify-content-center sidebar-head-spinner d-none">
@@ -32,9 +32,7 @@
                         </div>
                         <div class="input-group mb-3 col-6">
                             <x-forms.input-label-custom>Filter by tags</x-forms.input-label-custom>
-                            <div class="tags-filter-wrapper row">
-
-                            </div>
+                            <div class="tags-filter-wrapper row"></div>
                         </div>
                         <div class="col-12 listItems-content">
                             <div class="col-12 text-center h3">
@@ -56,6 +54,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" name="currentTaskList_id" />
 
 
     <x-forms.modal.add-task-list/>

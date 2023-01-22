@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Services;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TaskList\DestroyRequest;
 use App\Http\Requests\TaskList\PatchRequest;
 use App\Http\Requests\TaskList\StoreRequest;
 use App\Models\Pivot_TasklistAndUser;
 use App\Models\TaskList;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class TaskListService extends Controller
 {
-    public function store(StoreRequest $request)
+    /**
+     * Store new Task list
+     * @param StoreRequest $request
+     * @return void
+     */
+    public function store(StoreRequest $request): void
     {
         $taskList = TaskList::create([
             'name' => $request->name,
@@ -23,26 +25,27 @@ class TaskListService extends Controller
             'task_lists_id' => $taskList->id,
             'user_id' => auth()->user()->id,
         ]);
-
-        return response()->json([
-            'status' => '200',
-            'message' => 'New list created',
-            'taskList_id' => $taskList->id,
-        ]);
     }
 
-    public function destroy(TaskList $taskList)
+    /**
+     * Delete task list
+     * @param TaskList $taskList
+     * @return void
+     */
+    public function destroy(TaskList $taskList): void
     {
         Pivot_TasklistAndUser::where('task_lists_id', $taskList->id)->delete();
         $taskList->delete();
 
-        return response()->json([
-            'status' => '200',
-            'message' => 'deleted',
-        ]);
+        ListItemService::deleteAllByTaskListId($taskList);
     }
 
-    public function patch(PatchRequest $request)
+    /**
+     * Update task list
+     * @param PatchRequest $request
+     * @return void
+     */
+    public function patch(PatchRequest $request): void
     {
         TaskList::where('id', $request->taskList_id)
             ->update([

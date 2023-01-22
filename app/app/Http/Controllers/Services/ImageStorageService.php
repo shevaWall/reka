@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Services;
 
 use App\Http\Controllers\Controller;
 use App\Models\ListItem;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 
 class ImageStorageService extends Controller
 {
-    public static function store($req_file)
+    /**
+     * Store image from request
+     * @param $req_file
+     * @return array
+     */
+    public static function store($req_file): array
     {
         $r['original'] = $req_file->store('listItems_imgs', 'public');
         $r['preview'] = (new ImageStorageService)->makePreview($r['original'], $req_file->extension());
@@ -19,7 +23,12 @@ class ImageStorageService extends Controller
         return $r;
     }
 
-    public static function delete(ListItem $listItem)
+    /**
+     * Delete image from db and storage folder
+     * @param ListItem $listItem
+     * @return void
+     */
+    public static function delete(ListItem $listItem): void
     {
         if ($listItem->file){
             Storage::disk('public')->delete($listItem->file);
@@ -34,7 +43,13 @@ class ImageStorageService extends Controller
         $listItem->save();
     }
 
-    private function makePreview($originalFile_path, $extension)
+    /**
+     * Make preview
+     * @param $originalFile_path
+     * @param $extension
+     * @return string
+     */
+    private function makePreview($originalFile_path, $extension): string
     {
         $file = Storage::disk('public')->get($originalFile_path);
         $previewImg = Image::make($file);
@@ -49,7 +64,12 @@ class ImageStorageService extends Controller
 
     }
 
-    private function makePreviewFIleName($originalFile_path)
+    /**
+     * Make name for preview file
+     * @param $originalFile_path
+     * @return string
+     */
+    private function makePreviewFIleName($originalFile_path): string
     {
         $ex = explode('/', $originalFile_path);
         $f_name = explode('.', $ex[1]);

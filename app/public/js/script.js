@@ -188,6 +188,9 @@ $(document).ready(function () {
 
 function deleteTaskList(taskList_id, element) {
     event.preventDefault();
+    let currentTaskList_id = $('input[name="currentTaskList_id"]').val();
+    let card_wrapper = $('.listItems-content');
+    let addNewTaskItemBtn = $('#addNewTaskItemBtn');
 
     $.ajax({
         url: '/ajax/taskList/'+taskList_id,
@@ -196,6 +199,11 @@ function deleteTaskList(taskList_id, element) {
             $('.sidebar-head-spinner').toggleClass('d-none');
         },
         success: function (msg) {
+            if(taskList_id == currentTaskList_id){
+                $(card_wrapper).children().remove();
+                $(addNewTaskItemBtn).addClass('d-none');
+            }
+
             $(element).parent().remove();
             if (!$('.sidebar-head-spinner').hasClass('d-none'))
                 $('.sidebar-head-spinner').toggleClass('d-none');
@@ -251,6 +259,7 @@ function loadTaskListItems(taskList_id) {
     let o_form = $('#addNewListItem');
     let addListItemBtn = $('#addNewTaskItemBtn');
     let tagsFilterWrapper = $('.tags-filter-wrapper');
+    let currentTaskList = $('input[name="currentTaskList_id"]');
     $(o_form).find('input[name="task_list_id"]').val(taskList_id);
 
     $.ajax({
@@ -266,6 +275,7 @@ function loadTaskListItems(taskList_id) {
             if ($(addListItemBtn).hasClass('d-none'))
                 $(addListItemBtn).toggleClass('d-none')
 
+            $(currentTaskList).val(taskList_id);
             cloneTagsInTagFilter();
         },
         error: function (msg) {
@@ -357,13 +367,17 @@ function listItemChangeState(element){
     let card = $(element).parents('.card');
     let listItem_id = $(card).attr('id').replace(/[^0-9, ]/g,"");
     let card_completed = $(card).find('input[name="completed"]').prop('checked');
+    let spinner = $(element).siblings('.spinner-border');
     let data = 'completed='+card_completed+"&list_item_id="+listItem_id;
+
     $.ajax({
         url: '/ajax/listItems/',
         type: 'patch',
         data: data,
         beforeSend: function () {
             $(element).attr('disabled', 'true');
+            $(element).addClass('d-none');
+            $(spinner).removeClass('d-none');
         },
         success: function (msg) {
             $.ajax({
@@ -380,7 +394,8 @@ function listItemChangeState(element){
             $(element).prop('checked', false);
         },
         complete: function (msg) {
-
+            $(element).removeClass('d-none');
+            $(spinner).addClass('d-none');
         }
     });
 }

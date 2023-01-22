@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\ListItem;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TagController extends Controller
 {
-    public static function storeTags(ListItem $listItem, string $tags)
+    /**
+     * Store new tag for list item
+     * @param ListItem $listItem
+     * @param string $tags
+     * @return void
+     */
+    public static function storeTags(ListItem $listItem, string $tags): void
     {
         $tags_array = explode(',', $tags);
 
@@ -25,12 +30,22 @@ class TagController extends Controller
         DB::table('tags')->insert($tags_collection->toArray());
     }
 
-    public static function deleteTags(int $listItem_id)
+    /**
+     * delete all tags by list item id
+     * @param int $listItem_id
+     * @return void
+     */
+    public static function deleteTags(int $listItem_id): void
     {
         Tag::where('list_items_id', $listItem_id)->delete();
     }
 
-    public function deleteTag(Tag $tag)
+    /**
+     * delete tag by tag
+     * @param Tag $tag
+     * @return void
+     */
+    public function deleteTag(Tag $tag): void
     {
         $tag->delete();
     }
