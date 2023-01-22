@@ -28,6 +28,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    //        todo: check on unicalnost, make custom request
     public function store(Request $request): RedirectResponse
     {
         $request->validate([

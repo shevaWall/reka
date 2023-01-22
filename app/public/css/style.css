@@ -41,7 +41,8 @@
 
 #addNewTaskList .modal-footer.row.justify-content-around,
 #editTaskList .modal-footer.row.justify-content-around,
-#addNewListItem .modal-footer.row.justify-content-around{
+#addNewListItem .modal-footer.row.justify-content-around,
+#editListItem .modal-footer.row.justify-content-around{
     border-top:0;
 }
 

@@ -48,11 +48,7 @@ class ListItemService extends Controller
         }
 
         if($request->tags)
-           $tag =  TagController::storeTags($listItem, $request->tags);
-
-        return response()->json([
-            'status' => $tag,
-        ]);
+           TagController::storeTags($listItem, $request->tags);
     }
 
     public static function delete(ListItem $listItem)

@@ -22,11 +22,12 @@
                     'col-md-10' => $listItem->file_preview == '',
                     ])>
             <div class="card-body">
-                <h5 class="card-title">{{$listItem->name}}
+                <div class="row">
+                    <h5 class="card-title col-auto">{{$listItem->name}}</h5>
                     @if($listItem->completed)
-                        <span class="bg-success p-1 text-white">Completed</span>
+                        <span class="h5 bg-success p-1 text-white col-auto">Completed</span>
                     @endif
-                </h5>
+                </div>
                 @if($listItem->tags)
                     <div class="tags-wrapper">
                             @foreach($listItem->tags as $tag)

@@ -17,10 +17,24 @@
             <div class="row shadow pt-2">
                 <div class="col-12 text-center h5">Task items</div>
                 <div class="col-12 listItems-wrapper">
-
                     <div class="row">
                         <div class="col-12 text-center spinners d-none">
                             <x-spinner.four-spinner />
+                        </div>
+                        <div class="input-group mb-3 col-6">
+                            <x-forms.input-label-custom>Search by Title</x-forms.input-label-custom>
+                            <x-forms.text-input
+                                placeholder="search by task title"
+                                type="search"
+                                name="listItem_search"
+
+                            />
+                        </div>
+                        <div class="input-group mb-3 col-6">
+                            <x-forms.input-label-custom>Filter by tags</x-forms.input-label-custom>
+                            <div class="tags-filter-wrapper row">
+
+                            </div>
                         </div>
                         <div class="col-12 listItems-content">
                             <div class="col-12 text-center h3">
@@ -31,7 +45,6 @@
                                 @endif
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-10 mx-auto text-center bg-light py-3 btn d-none"

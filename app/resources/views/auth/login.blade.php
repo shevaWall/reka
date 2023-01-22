@@ -10,16 +10,17 @@
         @csrf
 
         <!-- Email Address -->
+{{--        todo: check on email pattern--}}
         <div class="input-group mb-3">
             <x-forms.input-label-with-dog/>
-            <x-forms.text-input placeholder="Email" type="email" name="email" :value="old('email')" required/>
+            <x-forms.text-input placeholder="Email" type="email" name="email" :value="old('email')" required="required"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2"/>
         </div>
 
         <!-- Password -->
         <div class="input-group mb-3">
             <x-forms.input-label-custom>PSWD</x-forms.input-label-custom>
-            <x-forms.text-input placeholder="Password" type="password" name="password" required autocomplete="new-password"/>
+            <x-forms.text-input placeholder="Password" type="password" name="password" required="required" autocomplete="new-password"/>
             <x-input-error :messages="$errors->get('password')" class="mt-2"/>
         </div>
 
@@ -30,11 +31,11 @@
         </div>
 
         <div class="text-center">
-            @if (Route::has('password.request'))
+            {{--@if (Route::has('password.request'))
                 <a class="btn" href="{{ route('password.request') }}">Forgot your password?</a>
-            @endif
+            @endif--}}
 
-            <x-forms.button-success>Log in</x-forms.button-success>
+            <x-primary-button>Log in</x-primary-button>
         </div>
     </form>
 </x-guest-layout>
